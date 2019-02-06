@@ -25,7 +25,7 @@ class Search extends Component {
 
     render() {
         //Destructure props & state
-        const { books, onReturn }  = this.props
+        const { myBooks, onReturn }  = this.props
         const { query } = this.state
         
         //Create booksvisible, the filtered list of books to power the rendered view
@@ -61,12 +61,12 @@ class Search extends Component {
           </div>
         )
     }
-    
-    //Add proptypes setup for type/required checks
-    static propTypes = {
-        books: PropTypes.array.isRequired,
-        onReturn: PropTypes.func.isRequired,
-    }
+}
+
+//Add proptypes setup for type/required checks
+Search.propTypes = {
+    myBooks: PropTypes.array.isRequired,
+    onReturn: PropTypes.func.isRequired,
 }
 
 export default Search
