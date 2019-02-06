@@ -18,7 +18,7 @@ class BooksApp extends Component {
     booksRead : [],
     showSearchPage: false,
   }
-
+  
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
@@ -34,6 +34,37 @@ class BooksApp extends Component {
         // console.log('booksRead = ',booksRead)
       })
   }
+
+  handleUpdateBook = (updatedbook) => {
+    // console.log(`handleUpdateBook: updatedbook ID ${updatedbook.id} and name ${updatedbook.title}`);
+    let index = this.state.books.findIndex(book => book.id === updatedbook.id)
+    let newBooks = this.state.books
+    newBooks.splice(index, 1, updatedbook)
+    // console.log('handleUpdateBook newBooks = ',newBooks);
+    
+    let newBooksCurrentlyReading = newBooks.filter( book => book.shelf === ShelfCurrentlyReading )
+    let newbooksWantToRead = newBooks.filter( book => book.shelf === ShelfWantToRead )
+    let newbooksRead = newBooks.filter( book => book.shelf === ShelfRead )
+    this.setState(
+      {
+        books:newBooks,
+        booksCurrentlyReading:newBooksCurrentlyReading,
+        booksWantToRead:newbooksWantToRead,
+        booksRead:newbooksRead,
+      }
+    )
+    BooksAPI.update(updatedbook, updatedbook.shelf);
+  }
+
+  // removeContact = (contact) => {
+  //   this.setState((currentState) => ({
+  //     contacts: currentState.contacts.filter((c) => {
+  //       return c.id !== contact.id
+  //     })
+  //   }))
+
+  //   ContactsAPI.remove(contact);
+  // }
 
   handleOnReturnFromSearch = () => {
     this.setState({ showSearchPage: false })
@@ -57,17 +88,20 @@ class BooksApp extends Component {
                 <Bookshelf 
                   shelfName='Currently Reading' 
                   shelfID={ShelfCurrentlyReading} 
-                  shelfBooks={booksCurrentlyReading} 
+                  shelfBooks={booksCurrentlyReading}
+                  handleUpdateBook={this.handleUpdateBook}
                 />
                 <Bookshelf 
                   shelfName='Want to read' 
                   shelfID={ShelfWantToRead} 
                   shelfBooks={booksWantToRead} 
+                  handleUpdateBook={this.handleUpdateBook}
                 />
                 <Bookshelf 
                   shelfName='Read' 
                   shelfID={ShelfRead} 
                   shelfBooks={booksRead} 
+                  handleUpdateBook={this.handleUpdateBook}
                 />
               </div>
             </div>

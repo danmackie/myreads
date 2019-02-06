@@ -4,7 +4,7 @@ import Book from './Book';
 
 const Bookshelf = props => {
     //Destructure props
-    const { shelfName, shelfID, shelfBooks }  = props
+    const { shelfName, shelfID, shelfBooks, handleUpdateBook }  = props
     console.log('Bookshelf: ',shelfName);
     console.log('Bookshelf books: ',shelfBooks);
 
@@ -14,7 +14,7 @@ const Bookshelf = props => {
             <div className="bookshelf-books">
             <ol className="books-grid">
                 {shelfBooks.map(book => (
-                    <Book key={book.id} book={book} />
+                    <Book key={book.id} book={book} handleUpdateBook={handleUpdateBook}/>
                 ))}
             </ol>
             </div>
@@ -27,6 +27,7 @@ Bookshelf.propTypes = {
     shelfID: PropTypes.string.isRequired,
     shelfName: PropTypes.string.isRequired,
     shelfBooks: PropTypes.array.isRequired,
+    handleUpdateBook: PropTypes.func.isRequired,
 }
 
 export default Bookshelf

@@ -4,8 +4,8 @@ import BookOptionsMenu from './BookOptionsMenu';
 
 const Book = props => {
     //Destructure props
-    const {book}  = props
-    console.log(book);
+    const { book, handleUpdateBook }  = props
+    // console.log(book);
     
     const authorNames = book.authors.join(" & "); 
 
@@ -21,7 +21,11 @@ const Book = props => {
                     height: 193, 
                     backgroundImage: getCoverURL()
                 }}></div>
-                <BookOptionsMenu key='{book.id}' book={book} />
+                <BookOptionsMenu 
+                    key={book.id} 
+                    book={book}
+                    handleUpdateBook={handleUpdateBook} 
+                />
             </div>
             <div className="book-title">{book.title}</div>
             <div className="book-authors">{authorNames}</div>
@@ -32,6 +36,7 @@ const Book = props => {
 //Add proptypes setup for type/required checks
 Book.propTypes = {
     book: PropTypes.object.isRequired,
+    handleUpdateBook: PropTypes.func.isRequired,
 }
 
 export default Book
