@@ -23,7 +23,7 @@ class BooksApp extends Component {
     BooksAPI.getAll()
       .then((books) => {
         this.setState(() => ({
-          books:books,
+          myBooks:books,
           booksCurrentlyReading:books.filter( book => book.shelf === ShelfCurrentlyReading ),
           booksWantToRead:books.filter( book => book.shelf === ShelfWantToRead ),
           booksRead:books.filter( book => book.shelf === ShelfRead ),
@@ -47,7 +47,7 @@ class BooksApp extends Component {
     let newbooksRead = newBooks.filter( book => book.shelf === ShelfRead )
     this.setState(
       {
-        books:newBooks,
+        myBooks:newBooks,
         booksCurrentlyReading:newBooksCurrentlyReading,
         booksWantToRead:newbooksWantToRead,
         booksRead:newbooksRead,
@@ -66,7 +66,7 @@ class BooksApp extends Component {
   //   ContactsAPI.remove(contact);
   // }
 
-  handleOnReturnFromSearch = () => {
+  handleReturnFromSearch = () => {
     this.setState({ showSearchPage: false })
   }
 
@@ -77,7 +77,11 @@ class BooksApp extends Component {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <Search myBooks={myBooks} onReturn={this.handleOnReturnFromSearch}/>
+          <Search 
+            handleUpdateBook={this.handleUpdateBook}
+            myBooks={myBooks} 
+            handleReturn={this.handleReturnFromSearch}
+          />
         ) : (
           <div className="list-books">
             <div className="list-books-title">

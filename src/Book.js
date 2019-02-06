@@ -7,11 +7,8 @@ const Book = props => {
     const { book, handleUpdateBook }  = props
     // console.log(book);
     
-    const authorNames = book.authors.join(" & "); 
-
-    const getCoverURL = () => {
-        return `url(${book.imageLinks.thumbnail})`
-    }
+    const getAuthorNames = (book.authors) ? book.authors.join(" & "): '' ; 
+    const getCoverURL = () => (`url(${book.imageLinks.thumbnail})`)
 
     return (
         <div className="book">
@@ -28,7 +25,7 @@ const Book = props => {
                 />
             </div>
             <div className="book-title">{book.title}</div>
-            <div className="book-authors">{authorNames}</div>
+            <div className="book-authors">{getAuthorNames}</div>
         </div>
     );
 }

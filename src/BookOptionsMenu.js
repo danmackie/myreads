@@ -22,8 +22,8 @@ const BookOptionsMenu = props => {
     
     return (
         <div className="book-shelf-changer">
-            <select selected onChange={handleUpdateBookLocal}>
-                <option style={{}} selected value="move" disabled>Move to...</option>
+            <select defaultValue='move' selected onChange={handleUpdateBookLocal}>
+                <option style={{}} value="move" disabled>Move to...</option>
                 <option
                     disabled={getDisabled('currentlyReading')}
                     style={getStyle('currentlyReading')}
