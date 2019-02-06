@@ -37,8 +37,8 @@ class BooksApp extends Component {
 
   handleUpdateBook = (updatedbook) => {
     // console.log(`handleUpdateBook: updatedbook ID ${updatedbook.id} and name ${updatedbook.title}`);
-    let index = this.state.books.findIndex(book => book.id === updatedbook.id)
-    let newBooks = this.state.books
+    let index = this.state.myBooks.findIndex(book => book.id === updatedbook.id)
+    let newBooks = this.state.myBooks
     newBooks.splice(index, 1, updatedbook)
     // console.log('handleUpdateBook newBooks = ',newBooks);
     
