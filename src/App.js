@@ -91,19 +91,16 @@ class BooksApp extends Component {
               <div>
                 <Bookshelf 
                   shelfName='Currently Reading' 
-                  shelfID={ShelfCurrentlyReading} 
                   shelfBooks={booksCurrentlyReading}
                   handleUpdateBook={this.handleUpdateBook}
                 />
                 <Bookshelf 
                   shelfName='Want to read' 
-                  shelfID={ShelfWantToRead} 
                   shelfBooks={booksWantToRead} 
                   handleUpdateBook={this.handleUpdateBook}
                 />
                 <Bookshelf 
                   shelfName='Read' 
-                  shelfID={ShelfRead} 
                   shelfBooks={booksRead} 
                   handleUpdateBook={this.handleUpdateBook}
                 />

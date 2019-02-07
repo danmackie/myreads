@@ -4,7 +4,7 @@ import Book from './Book';
 
 const Bookshelf = props => {
     //Destructure props
-    const { shelfName, shelfID, shelfBooks, handleUpdateBook }  = props
+    const { shelfName, shelfBooks, handleUpdateBook }  = props
     console.log('Bookshelf: ',shelfName);
     console.log('Bookshelf books: ',shelfBooks);
 
@@ -24,7 +24,6 @@ const Bookshelf = props => {
 
 //Add proptypes setup for type/required checks
 Bookshelf.propTypes = {
-    shelfID: PropTypes.string.isRequired,
     shelfName: PropTypes.string.isRequired,
     shelfBooks: PropTypes.array.isRequired,
     handleUpdateBook: PropTypes.func.isRequired,
