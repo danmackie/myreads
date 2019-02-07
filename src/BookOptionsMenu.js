@@ -3,26 +3,26 @@ import PropTypes from 'prop-types';
 
 const BookOptionsMenu = props => {
     //Destructure props
-    const { book, handleUpdateBook }  = props
+    const { book, handleUpdateBook, shelf }  = props
 
     const getDisabled = (optionString) => {
-        return optionString === book.shelf
+        return optionString === shelf
     }
 
     const getStyle = (optionString) => {
-        return optionString === book.shelf ? {background: '#60ac5d', color:'#fff'} : null;
+        // console.log(shelf);
+        return optionString === shelf ? {background: '#60ac5d', color:'#fff'} : null;
     }
 
     const handleUpdateBookLocal = (event) => {
         book.shelf = event.target.value;
         // console.log('MENU: book.shelf = ', book.shelf );
-        
         handleUpdateBook(book);
     }
     
     return (
         <div className="book-shelf-changer">
-            <select defaultValue='move' selected onChange={handleUpdateBookLocal}>
+            <select defaultValue='move' selected onChange={handleUpdateBookLocal} >
                 <option style={{}} value="move" disabled>Move to...</option>
                 <option
                     disabled={getDisabled('currentlyReading')}
@@ -45,7 +45,13 @@ const BookOptionsMenu = props => {
                 >
                     Read
                 </option>
-                <option value="none">None</option>
+                <option
+                    disabled={getDisabled('none')}
+                    style={getStyle('none')}
+                    value="none"
+                >
+                    None
+                </option>
             </select>
         </div>
     );
@@ -55,6 +61,7 @@ const BookOptionsMenu = props => {
 BookOptionsMenu.propTypes = {
     book: PropTypes.object.isRequired,
     handleUpdateBook: PropTypes.func.isRequired,
+    shelf: PropTypes.string.isRequired,
 }
 
 export default BookOptionsMenu

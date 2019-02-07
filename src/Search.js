@@ -41,9 +41,6 @@ class Search extends Component {
             this.resetState()
             return;
         }
-        // this.setState(() => ({
-        //     query: searchquery.trim()
-        // }))
         BooksAPI.search(trimmedsearch)
             .then((booksvis) => {
                    (booksvis) && this.updateStateBooks(booksvis)
@@ -51,19 +48,26 @@ class Search extends Component {
             )
     }
 
+    getShelfName = (book) => {
+        //Check book is in myBooks list and identify the shelf name - for the menu context
+        let shelfBooks = this.props.myBooks;
+        var theShelf = '';
+        for (let b = 0; b < shelfBooks.length; b++) {
+            let thebook = shelfBooks[b];
+            if (thebook.id === book.id){
+                theShelf = thebook.shelf
+                break;
+            }else{
+                theShelf = 'none';
+            }
+        }
+        return theShelf;
+    }
+
     render() {
         //Destructure props & state
-        const { myBooks, handleReturn, handleUpdateBook }  = this.props
+        const { handleReturn, handleUpdateBook }  = this.props
         const { booksvisible } = this.state
-        // const { query, booksvisible } = this.state
-        
-        // Create booksvisible, the filtered list of books to power the rendered view
-        // based on the state, which is based on input field.
-        // const booksvisible = query === ''
-        // ? books 
-        // : books.filter((book) => (
-        //     book.title.toLowerCase().includes(query.toLowerCase())
-        // ))
         
         return(
             <div className="search-books">
@@ -87,7 +91,7 @@ class Search extends Component {
             <div className="search-books-results">
               <ol className="books-grid">
                 {booksvisible.map(book => (
-                    <Book key={book.id} book={book} handleUpdateBook={handleUpdateBook}/>
+                    <Book shelf={this.getShelfName(book)} key={book.id} book={book} handleUpdateBook={handleUpdateBook}/>
                 ))}
               </ol>
             </div>

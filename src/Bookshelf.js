@@ -5,8 +5,8 @@ import Book from './Book';
 const Bookshelf = props => {
     //Destructure props
     const { shelfName, shelfBooks, handleUpdateBook }  = props
-    console.log('Bookshelf: ',shelfName);
-    console.log('Bookshelf books: ',shelfBooks);
+    // console.log('Bookshelf: ',shelfName);
+    // console.log('Bookshelf books: ',shelfBooks);
 
     return (
         <div className="bookshelf">
@@ -14,7 +14,7 @@ const Bookshelf = props => {
             <div className="bookshelf-books">
             <ol className="books-grid">
                 {shelfBooks.map(book => (
-                    <Book key={book.id} book={book} handleUpdateBook={handleUpdateBook}/>
+                    <Book shelf={book.shelf} key={book.id} book={book} handleUpdateBook={handleUpdateBook}/>
                 ))}
             </ol>
             </div>
